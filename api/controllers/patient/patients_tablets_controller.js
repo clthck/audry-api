@@ -17,11 +17,20 @@ module.exports = {
     return next();
   },
 
-  delete: async (ctx, next) => {
-    const { patientId } = ctx.request.body;
-    const { tabletId } = ctx.state.user;
-    const affectedRows = await PatientTablet.destroy({ where: { patientId, tabletId } });
+  destroy: async (ctx, next) => {
+    const affectedRows = await PatientTablet.destroy({ where: { id: ctx.params.id } });
     ctx.render('patient/patients_tablets/destroy', { affectedRows });
+    return next();
+  },
+
+  update: async (ctx, next) => {
+    const { languageId } = ctx.request.body;
+    const patientTablet = await PatientTablet.findById(ctx.params.id, {
+        include: [PatientTablet.associations.patient]
+    });
+    const updatedPatient = await patientTablet.patient.update({ languageId });
+    
+    ctx.render('patient/patients_tablets/update', { updatedPatient });
     return next();
   }
 };

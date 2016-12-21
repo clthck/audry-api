@@ -7,6 +7,7 @@ block script
       json = {
         success: true,
         data: {
+          id: patientTablet.id,
           assignedAt: patientTablet.createdAt,
           assignedBy: patientTablet.assigner.fullName,
           assignedTablet: patientTablet.tablet.udid
