@@ -1,0 +1,17 @@
+extends ../../layout
+block script
+  -
+    json = {
+      data: { patients: [] }
+    };
+
+    if (patients.length > 0) {
+      var data = json.data.patients;
+      var patient;
+
+      for (var i = 0, n = patients.length; i < n; i ++) {
+        patient = patients[i].toJSON();
+        delete patient.primaryNurse.user.password;
+        data.push(patient);
+      }
+    }

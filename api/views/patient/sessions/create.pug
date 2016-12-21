@@ -1,0 +1,11 @@
+extends ../../layout
+block script
+  -
+    if (user && typeof user === 'object' && user.accessToken) {
+      json = {
+        type: true,
+        accessToken: user.accessToken
+      }
+    } else {
+      json = { type: false };
+    }

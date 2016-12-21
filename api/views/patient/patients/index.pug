@@ -1,0 +1,16 @@
+extends ../../layout
+block script
+  -
+    json = {
+      data: { patients: [] }
+    };
+
+    let data = json.data.patients;
+    for (const { id, firstName, lastName, bed } of patients) {
+      data.push({
+        id, firstName, lastName,
+        wardName: bed.room.ward.name,
+        roomName: bed.room.name,
+        bedName: bed.name
+      });
+    }

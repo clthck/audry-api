@@ -1,0 +1,32 @@
+{
+  "name": "audry-api",
+  "version": "0.0.1",
+  "description": "Audry API Server",
+  "main": "app.js",
+  "scripts": {
+    "start": "node --harmony-async-await app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/uphack/audry-api.git"
+  },
+  "author": "darkturtle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uphack/audry-api/issues"
+  },
+  "homepage": "https://github.com/uphack/audry-api#readme",
+  "dependencies": {
+    "dotenv": "^2.0.0",
+    "koa": "^2.0.0",
+    "koa-body": "^2.0.0",
+    "koa-jwt": "^2.1.0",
+    "koa-pug": "^3.0.0-1",
+    "koa-router": "^7.0.1",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "pryjs": "^1.0.3"
+  }
+}

@@ -1,0 +1,8 @@
+extends ../../layout
+block script
+  -
+    json = { type: false };
+    
+    if (response && response.id) {
+      json.type = true;
+    }
