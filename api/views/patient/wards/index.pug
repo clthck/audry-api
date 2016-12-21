@@ -1,0 +1,11 @@
+extends ../../layout
+block script
+  -
+    json = {
+      data: { wards: [] }
+    }
+
+    const data = json.data.wards;
+    for (const { id, name } of wards) {
+      data.push({ id, name });
+    }
