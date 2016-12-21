@@ -1,6 +1,6 @@
 'use strict';
 
-const { sessions, patients, wards } = require('../../api/controllers/patient');
+const { sessions, patients, wards, languages } = require('../../api/controllers/patient');
 
 module.exports = (routers) => {
   // Router for endpoints that don't need authentication.
@@ -10,5 +10,6 @@ module.exports = (routers) => {
   // Router for endpoints that require authentication.
   routers.authenticated
     .get('/patients', patients.index)
-    .get('/wards', wards.index);
+    .get('/wards', wards.index)
+    .get('/languages', languages.index);
 }
