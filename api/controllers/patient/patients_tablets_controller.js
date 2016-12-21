@@ -15,5 +15,13 @@ module.exports = {
 
     ctx.render('patient/patients_tablets/create', { patientTablet });
     return next();
+  },
+
+  delete: async (ctx, next) => {
+    const { patientId } = ctx.request.body;
+    const { tabletId } = ctx.state.user;
+    const affectedRows = await PatientTablet.destroy({ where: { patientId, tabletId } });
+    ctx.render('patient/patients_tablets/destroy', { affectedRows });
+    return next();
   }
 };

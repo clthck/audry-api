@@ -15,5 +15,6 @@ module.exports = (routers) => {
     .get('/patients', patients.index)
     .get('/wards', wards.index)
     .get('/languages', languages.index)
-    .post('/assignTablet', accessCode.confirm, patientsTablets.create);
+    .post('/assignTablet', accessCode.confirm, patientsTablets.create)
+    .post('/deassignTablet', accessCode.confirm, patientsTablets.delete);
 }
