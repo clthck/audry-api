@@ -10,6 +10,8 @@ module.exports = {
 
     patient.update({ languageId, interfaceWardId });
     const patientTablet = await PatientTablet.create({ patientId, tabletId, assignerId: userId });
+    patientTablet.tablet = await patientTablet.getTablet();
+    patientTablet.assigner = await patientTablet.getAssigner();
 
     ctx.render('patient/patients_tablets/create', { patientTablet });
     return next();

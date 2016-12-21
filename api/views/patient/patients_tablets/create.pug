@@ -4,5 +4,12 @@ block script
     json = { success: false };
 
     if (patientTablet && typeof patientTablet === 'object' && patientTablet.id) {
-      json.success = true;
+      json = {
+        success: true,
+        data: {
+          assignedAt: patientTablet.createdAt,
+          assignedBy: patientTablet.assigner.fullName,
+          assignedTablet: patientTablet.tablet.udid
+        }
+      }
     }

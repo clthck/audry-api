@@ -1,5 +1,6 @@
 'use strict';
 
+const accessCode = require('../../api/controllers/patient/concerns/access_code.js');
 const {
   sessions, patients, wards, languages, patientsTablets
 } = require('../../api/controllers/patient');
@@ -14,5 +15,5 @@ module.exports = (routers) => {
     .get('/patients', patients.index)
     .get('/wards', wards.index)
     .get('/languages', languages.index)
-    .post('/assignTablet', patientsTablets.create);
+    .post('/assignTablet', accessCode.confirm, patientsTablets.create);
 }
