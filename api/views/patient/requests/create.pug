@@ -1,0 +1,10 @@
+extends ../../layout
+block script
+  -
+    json = {
+      success: false
+    };
+
+    if (request && typeof request === 'object' && request.id) {
+      json.success = true;
+    }
