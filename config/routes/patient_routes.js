@@ -2,13 +2,14 @@
 
 const accessCode = require('../../api/controllers/patient/concerns/access_code.js');
 const {
-  sessions, patients, wards, languages, patientsTablets
+  sessions, patients, wards, languages, patientsTablets, wardsServices
 } = require('../../api/controllers/patient');
 
 module.exports = (routers) => {
   // Router for endpoints that don't need authentication.
   routers.unauthenticated
-    .post('/unlock', sessions.create);
+    .post('/unlock', sessions.create)
+    .get('/wardsServices', wardsServices.index);
 
   // Router for endpoints that require authentication.
   routers.authenticated

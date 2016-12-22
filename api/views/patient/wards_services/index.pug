@@ -1,0 +1,13 @@
+extends ../../layout
+block script
+  -
+    json = {
+      data: { wardServices: [] }
+    };
+
+    let data = json.data.wardServices;
+    for (const { serviceCategory, level1, level2, level3 } of wardServiceCategories) {
+      data.push({
+        serviceCategory, level1, level2, level3
+      });
+    }
