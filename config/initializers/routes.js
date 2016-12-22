@@ -39,22 +39,33 @@ module.exports = (app) => {
   configNurseRoutes(routers.nurse);
   configPatientRoutes(routers.patient);
 
-  let unauthenticatedRoutePaths = [];
+  let unauthenticatedRoutesInfo = [];
 
   for (let i in routers) {
+    unauthenticatedRoutesInfo = unauthenticatedRoutesInfo.concat(
+      _.map(routers[i].unauthenticated.stack, layer => [layer.regexp, layer.methods])
+    );
+
     for (let j in routers[i]) {
       routers[i][j].all('/*', (ctx, next) => {
         ctx.type = 'application/json; charset=utf-8';
         return next();
       });
     }
+
     app.use(routers[i].unauthenticated.routes());
     app.use(routers[i].unauthenticated.allowedMethods());
-    unauthenticatedRoutePaths = unauthenticatedRoutePaths.concat(_.pluck(routers[i].unauthenticated.stack, 'path'));
   }
 
   app.use( (ctx, next) => {
-    if (unauthenticatedRoutePaths.includes(ctx.url) !== true) {
+    let requireAuthentication = false;
+    for (const [regexp, methods] of unauthenticatedRoutesInfo) {
+      if (regexp.test(ctx.path) && methods.includes(ctx.method)) {
+        requireAuthentication = true;
+        break;
+      }
+    }
+    if (!requireAuthentication) {
       return next();
     }
   });
