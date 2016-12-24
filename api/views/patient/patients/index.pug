@@ -9,6 +9,7 @@ block script
     for (const { id, firstName, lastName, bed } of patients) {
       data.push({
         id, firstName, lastName,
+        wardId: bed.room.wardId,
         wardName: bed.room.ward.name,
         roomName: bed.room.name,
         bedName: bed.name
