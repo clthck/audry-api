@@ -1,0 +1,35 @@
+extends ../../layout
+block script
+  -
+    json = { assigned: false };
+
+    const pt = patientTablet;
+
+    if (pt && typeof pt === 'object' && pt.id) {
+      json = {
+        assigned: true,
+        data: {
+          id: pt.id,
+          patient: {
+            id: pt.patient.id,
+            firstName: pt.patient.firstName,
+            lastName: pt.patient.lastName,
+            wardName: pt.patient.bed.room.ward.name,
+            roomName: pt.patient.bed.room.name,
+            bedName: pt.patient.bed.name,
+            interfaceWardId: pt.patient.interfaceWardId,
+            languageId: pt.patient.languageId
+          },
+          assignedAt: pt.createdAt,
+          assigner: {
+            id: pt.assigner.id,
+            firstName: pt.assigner.firstName,
+            lastName: pt.assigner.lastName
+          },
+          tablet: {
+            udid: pt.tablet.udid,
+            lastKnownBatteryLevel: pt.tablet.lastKnownBatteryLevel
+          }
+        }
+      };
+    }

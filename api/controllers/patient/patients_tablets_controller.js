@@ -1,6 +1,8 @@
 'use strict';
 
-const { Patient, PatientTablet } = require('audry-common').models;
+const {
+  Patient, PatientTablet, Tablet, Bed, Room, Ward, User, Language
+} = require('audry-common').models;
 
 module.exports = {
   create: async (ctx, next) => {
@@ -31,6 +33,34 @@ module.exports = {
     const updatedPatient = await patientTablet.patient.update({ languageId });
     
     ctx.render('patient/patients_tablets/update', { updatedPatient });
+    return next();
+  },
+
+  getAssignedInfo: async (ctx, next) => {
+    const { tabletId } = ctx.state.user;
+    const patientTablet = await PatientTablet.findOne({
+      where: { tabletId },
+      include: [{
+        model: Patient, as: 'patient',
+        include: [{
+          model: Language, as: 'language'
+        }, {
+          model: Bed, as: 'bed',
+          include: [{
+            model: Room, as: 'room',
+            include: [{
+              model: Ward, as: 'ward'
+            }]
+          }]
+        }]
+      }, {
+        model: Tablet, as: 'tablet'
+      }, {
+        model: User, as: 'assigner'
+      }]
+    });
+
+    ctx.render('patient/patients_tablets/get_assigned_info', { patientTablet });
     return next();
   }
 };
