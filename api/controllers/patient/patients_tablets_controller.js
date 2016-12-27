@@ -45,6 +45,8 @@ module.exports = {
         include: [{
           model: Language, as: 'language'
         }, {
+          model: Ward, as: 'interfaceWard'
+        }, {
           model: Bed, as: 'bed',
           include: [{
             model: Room, as: 'room',

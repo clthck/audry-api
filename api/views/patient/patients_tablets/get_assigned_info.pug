@@ -17,8 +17,14 @@ block script
             wardName: pt.patient.bed.room.ward.name,
             roomName: pt.patient.bed.room.name,
             bedName: pt.patient.bed.name,
-            interfaceWardId: pt.patient.interfaceWardId,
-            languageId: pt.patient.languageId
+            interfaceWard: {
+              id: pt.patient.interfaceWardId,
+              name: pt.patient.interfaceWard.name
+            },
+            language: {
+              id: pt.patient.languageId,
+              name: pt.patient.language.name
+            }
           },
           assignedAt: pt.createdAt,
           assigner: {
