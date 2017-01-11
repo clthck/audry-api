@@ -11,7 +11,7 @@ block script
 
       for (var i = 0, n = patients.length; i < n; i ++) {
         patient = patients[i].toJSON();
-        delete patient.primaryNurse.user.password;
+        delete patient.primaryNurse.user.passwordHash;
         data.push(patient);
       }
     }
