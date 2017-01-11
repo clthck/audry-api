@@ -1,7 +1,7 @@
 'use strict';
 
 const jwt = require('jsonwebtoken');
-const { User, Nurse } = require('audry-common').models;
+const { User, Nurse, NurseStation } = require('audry-common').models;
 
 module.exports = {
   create: async (ctx, next) => {
@@ -11,7 +11,13 @@ module.exports = {
     if (username && password) {
       user = await User.findOne({
         where: { username },
-        include: [User.associations.nurse]
+        include: [{
+          model: Nurse, as: 'nurse',
+          include: [{
+            model: NurseStation, as: 'nurseStation',
+            include: [NurseStation.associations.ward]
+          }]
+        }]
       });
 
       if (user && user.nurse) {

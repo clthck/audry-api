@@ -5,6 +5,7 @@ block script
       json = {
         type: true,
         nurseId: user.nurse.id,
+        wardName: user.nurse.nurseStation.ward.name,
         accessToken: user.accessToken
       };
     } else {
