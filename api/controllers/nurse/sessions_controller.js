@@ -5,7 +5,7 @@ const { User, Nurse, NurseStation } = require('audry-common').models;
 
 module.exports = {
   create: async (ctx, next) => {
-    const { username, password } = ctx.request.body;
+    const { username, password, apnDeviceToken } = ctx.request.body;
     let user = null;
 
     if (username && password) {
@@ -23,6 +23,8 @@ module.exports = {
       if (user && user.nurse) {
         if (user.authenticate(password)) {
           const payload = { id: user.id, lastLoggedInAt: Date.now };
+          user.apnDeviceToken = apnDeviceToken;
+          user.save();
           user.accessToken = jwt.sign(payload, process.env.JWT_SHARED_SECRET, { expiresIn: '7 days' });
         } else {
           user = -1;

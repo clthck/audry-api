@@ -6,13 +6,15 @@ const {
 
 module.exports = {
   create: async (ctx, next) => {
-    const { patientId, languageId, interfaceWardId } = ctx.request.body;
+    const { patientId, languageId, interfaceWardId, apnDeviceToken } = ctx.request.body;
     const { id: userId, tabletId } = ctx.state.user;
     const patient = await Patient.findById(patientId);
 
     patient.update({ languageId, interfaceWardId });
     const patientTablet = await PatientTablet.create({ patientId, tabletId, assignerId: userId });
     patientTablet.tablet = await patientTablet.getTablet();
+    patientTablet.tablet.apnDeviceToken = apnDeviceToken;
+    patientTablet.tablet.save();
     patientTablet.assigner = await patientTablet.getAssigner();
 
     ctx.render('patient/patients_tablets/create', { patientTablet });

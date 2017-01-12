@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/uphack/audry-api#readme",
   "dependencies": {
+    "apn": "^2.1.2",
     "audry-common": "git+https://github.com/clthck/audry-common.git",
     "dotenv": "^2.0.0",
     "koa": "^2.0.0",

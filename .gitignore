@@ -4,3 +4,8 @@ npm-debug.log
 .DS_Store
 
 .env
+
+/config/apn/nurse/*
+!/config/apn/nurse/.keep
+/config/apn/patient/*
+!/config/apn/patient/.keep
