@@ -1,0 +1,13 @@
+extends ../../layout
+block script
+  -
+    json = {
+      data: { nurses: [] }
+    };
+
+    const data = json.data.nurses;
+    for (let nurse of nurses) {
+      nurse = nurse.toJSON();
+      delete nurse.user.passwordHash;
+      data.push(nurse);
+    }

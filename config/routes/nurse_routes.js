@@ -1,6 +1,6 @@
 'use strict';
 
-const { sessions, patients, responses, requests } = require('../../api/controllers/nurse');
+const { sessions, patients, responses, requests, nurses } = require('../../api/controllers/nurse');
 
 module.exports = (routers) => {
   // Router for endpoints that don't need authentication.
@@ -11,5 +11,6 @@ module.exports = (routers) => {
   routers.authenticated
     .get('/patients', patients.index)
     .post('/responses', responses.create)
-    .put('/requests', requests.update);
+    .put('/requests', requests.update)
+    .get('/nurses/getOtherNurses', nurses.getOtherNurses);
 }
